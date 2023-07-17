@@ -2,15 +2,26 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { register } from '../../services/webchatbotAPI'
+import { useRouter } from 'next/navigation'
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Lógica para registrar o usuário
+    const token = await register(username, email, password)
+    if (!token.error){
+      localStorage.setItem('username', username);
+      localStorage.setItem('token', token.accessToken);
+      router.push('/chatbot')
+    } else {
+      alert(token.message)
+    }
   };
 
   return (
@@ -20,7 +31,7 @@ const Register = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="username" className="block mb-2 text-lg font-medium text-gray-700">
-              username
+              Username
             </label>
             <input
               type="text"
