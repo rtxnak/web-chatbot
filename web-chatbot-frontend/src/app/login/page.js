@@ -2,14 +2,25 @@
 
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { login } from '../../services/webchatbotAPI'
+import { useRouter } from 'next/navigation'
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Lógica para autenticação do usuário
+    const token = await login(username, password)
+    if (!token.error){
+      localStorage.setItem('username', username);
+      localStorage.setItem('token', token.accessToken);
+      router.push('/chatbot')
+    } else {
+      alert(token.message)
+    }
   };
 
   return (
