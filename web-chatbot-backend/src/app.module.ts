@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './users/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { ChatModule } from './chat/chat.module';
+import { ChatEntity } from './chat/entities/chat.entity';
 
 @Module({
   imports: [
@@ -17,11 +19,12 @@ import { AuthModule } from './auth/auth.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [UserEntity],
+      entities: [UserEntity, ChatEntity],
       synchronize: process.env.ENV === 'development',
     }),
     UserModule,
     AuthModule,
+    ChatModule,
   ],
   controllers: [],
   providers: [],
