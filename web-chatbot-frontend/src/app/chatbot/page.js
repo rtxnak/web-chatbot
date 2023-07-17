@@ -1,16 +1,26 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ChatMessage from '../../components/ChatMessage';
 import { useRouter } from 'next/navigation'
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
 
-  const user = localStorage.getItem('username').toUpperCase();
+  const user = localStorage.getItem('username');
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    if (!user && !token) {
+      router.push('/');
+    } else {
+      setIsLoading(false);
+    }
+  }, [user, token, router]);
 
   const handleMessageSubmit = (e) => {
     e.preventDefault();
@@ -102,6 +112,14 @@ const Chatbot = () => {
     router.push('/login')
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="text-2xl font-semibold">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100">
       <div className="flex-1 overflow-hidden px-1 pt-2 pb-8 max-w-md w-full">
@@ -109,7 +127,7 @@ const Chatbot = () => {
           <div className="max-w-md w-full mx-auto px-4 py-2 flex justify-between items-center">
             <h1 className="text-xl font-semibold">Chatbot</h1>
             <div className="flex items-center space-x-2">
-              <span className="text-gray-600">{user}</span>
+              <span className="text-gray-600">{user.toUpperCase()}</span>
               <a href="#" className="text-blue-500 hover:text-blue-600 font-semibold" onClick={handleLogoff}>
                 Logoff
               </a>
