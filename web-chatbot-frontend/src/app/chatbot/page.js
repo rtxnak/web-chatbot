@@ -2,10 +2,15 @@
 
 import { useState } from 'react';
 import ChatMessage from '../../components/ChatMessage';
+import { useRouter } from 'next/navigation'
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
+
+  const router = useRouter();
+
+  const user = localStorage.getItem('username').toUpperCase();
 
   const handleMessageSubmit = (e) => {
     e.preventDefault();
@@ -14,13 +19,13 @@ const Chatbot = () => {
     if (input.toLowerCase() === 'hello') {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { content: input, sender: 'user' },
+        { content: input, sender: user },
         { content: 'Hello! How can I assist you?', sender: 'bot' },
       ]);
     } else if (input.toLowerCase() === 'goodbye') {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { content: input, sender: 'user' },
+        { content: input, sender: user },
         { content: `Goodbye! If you have any questions or need assistance in the future, feel free to ask. Have a great day!`, sender: 'bot' },
         // Salvar no banco de dados e redirecionar para a página de criação de CSV
       ]);
@@ -28,19 +33,19 @@ const Chatbot = () => {
     } else if (input.toLowerCase() === 'good') {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { content: input, sender: 'user' },
+        { content: input, sender: user },
         { content: 'That is great!!', sender: 'bot' },
       ]);
     } else if (input.toLowerCase().includes('i want')) {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { content: input, sender: 'user' },
+        { content: input, sender: user },
         { content: `Certainly! Please let me know what you would like assistance with, and I'll do my best to help you.`, sender: 'bot' },
       ]);
     } else if (input.toLowerCase().includes('loan')) {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { content: input, sender: 'user' },
+        { content: input, sender: user },
         {
           content: 'Please select an option:',
           sender: 'bot',
@@ -54,7 +59,7 @@ const Chatbot = () => {
     } else {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { content: input, sender: 'user' },
+        { content: input, sender: user },
         { content: "I'm sorry, I didn't understand. Can you please rephrase?", sender: 'bot' },
       ]);
     }
@@ -70,25 +75,31 @@ const Chatbot = () => {
     if (option === 'apply') {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { content: 'i want to apply for a loan', sender: 'user' },
+        { content: 'i want to apply for a loan', sender: user },
         { content: "mensagens relevantes para a solicitação de empréstimo", sender: 'bot' },
         // mensagens relevantes para a solicitação de empréstimo
       ]);
     } else if (option === 'conditions') {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { content: 'i want to know loan conditions', sender: 'user' },
+        { content: 'i want to know loan conditions', sender: user },
         { content: "mensagens relevantes para as condições do empréstimo", sender: 'bot' },
         // mensagens relevantes para as condições do empréstimo
       ]);
     } else if (option === 'help') {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { content: 'i want help', sender: 'user' },
+        { content: 'i want help', sender: user },
         { content: "mensagens relevantes para a ajuda", sender: 'bot' },
         // mensagens relevantes para a ajuda
       ]);
     }
+  };
+
+  const handleLogoff = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+    router.push('/login')
   };
 
   return (
@@ -98,8 +109,8 @@ const Chatbot = () => {
           <div className="max-w-md w-full mx-auto px-4 py-2 flex justify-between items-center">
             <h1 className="text-xl font-semibold">Chatbot</h1>
             <div className="flex items-center space-x-2">
-              <span className="text-gray-600">Usuário Logado</span>
-              <a href="#" className="text-blue-500 hover:text-blue-600 font-semibold">
+              <span className="text-gray-600">{user}</span>
+              <a href="#" className="text-blue-500 hover:text-blue-600 font-semibold" onClick={handleLogoff}>
                 Logoff
               </a>
             </div>
@@ -110,7 +121,7 @@ const Chatbot = () => {
             <ChatMessage
               key={index}
               message={message.content}
-              isUser={message.sender === 'user'}
+              isUser={message.sender === user}
             />
           ))}
           {messages.length > 0 && messages[messages.length - 1].options && (
