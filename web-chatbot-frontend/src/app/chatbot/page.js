@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react';
 import ChatMessage from '../../components/ChatMessage';
 import { useRouter } from 'next/navigation'
+import { saveChat } from '../../services/webchatbotAPI'
+import Link from 'next/link';
+
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
@@ -15,14 +18,35 @@ const Chatbot = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    if (!user && !token) {
+    if (!user || !token) {
       router.push('/');
     } else {
       setIsLoading(false);
     }
   }, [user, token, router]);
 
-  const handleMessageSubmit = (e) => {
+
+  const organizeChat = (messages) => {
+    let organizedChat = '';
+
+    organizedChat += 'sender, content\n';
+
+    for (const message of messages) {
+      if (message.options) {
+        organizedChat += `${message.sender}, ${message.content};\n`;
+        for (const option of message.options) {
+          organizedChat += `, ${option.label}: ${option.value}\n`;
+        }
+      } else {
+        organizedChat += `${message.sender}, ${message.content}\n`;
+      }
+    }
+
+    return organizedChat;
+  }
+
+
+  const handleMessageSubmit = async (e) => {
     e.preventDefault();
     const input = inputValue.trim();
 
@@ -37,9 +61,11 @@ const Chatbot = () => {
         ...prevMessages,
         { content: input, sender: user },
         { content: `Goodbye! If you have any questions or need assistance in the future, feel free to ask. Have a great day!`, sender: 'bot' },
-        // Salvar no banco de dados e redirecionar para a página de criação de CSV
-      ]);
-      console.log(messages);
+      ])
+      const updatedMessages = [...messages]
+      updatedMessages.push({ content: input, sender: user }, { content: `Goodbye! If you have any questions or need assistance in the future, feel free to ask. Have a great day!`, sender: 'bot' })
+      const organizedChat = organizeChat(updatedMessages);
+      await saveChat(organizedChat, token)
     } else if (input.toLowerCase() === 'good') {
       setMessages((prevMessages) => [
         ...prevMessages,
@@ -112,6 +138,7 @@ const Chatbot = () => {
     router.push('/login')
   };
 
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -128,6 +155,9 @@ const Chatbot = () => {
             <h1 className="text-xl font-semibold">Chatbot</h1>
             <div className="flex items-center space-x-2">
               <span className="text-gray-600">{user.toUpperCase()}</span>
+              <Link href="/chat-historic">
+                <p className="text-green-500 hover:text-green-600 font-semibold">Chat History</p>
+              </Link>
               <a href="#" className="text-blue-500 hover:text-blue-600 font-semibold" onClick={handleLogoff}>
                 Logoff
               </a>

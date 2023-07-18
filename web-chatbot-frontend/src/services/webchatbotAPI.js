@@ -36,3 +36,28 @@ export const register = async (username, email,
     return axiosError.response?.data;
   }
 }
+
+export const saveChat = async (chat, token) => {
+  try {
+    const body = {
+      chat
+    }
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const { data } = await api.post('/chat', body);
+    return data;
+  } catch (error) {
+    const axiosError = error
+    return axiosError.response?.data;
+  }
+}
+
+export const getChatHistory = async (token) => {
+  try {
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const { data } = await api.get('/chat');
+    return data;
+  } catch (error) {
+    const axiosError = error
+    return axiosError.response?.data;
+  }
+}
