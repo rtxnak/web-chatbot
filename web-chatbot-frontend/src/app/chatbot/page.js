@@ -112,22 +112,23 @@ const Chatbot = () => {
       setMessages((prevMessages) => [
         ...prevMessages,
         { content: 'i want to apply for a loan', sender: user },
-        { content: "mensagens relevantes para a solicitação de empréstimo", sender: 'bot' },
-        // mensagens relevantes para a solicitação de empréstimo
+        { content: `Sure! It is important to provide precarious and updated information when requesting a loan; Therefore, make sure you have documents to deliver when you register. To start your loan, please access the link: `, sender: 'bot' },
+        { content: <a href="https://www.google.com.br/" className="text-blue-500 hover:text-blue-600">{`https://www.google.com.br/`}</a>, sender: 'bot' },
       ]);
     } else if (option === 'conditions') {
       setMessages((prevMessages) => [
         ...prevMessages,
         { content: 'i want to know loan conditions', sender: user },
-        { content: "mensagens relevantes para as condições do empréstimo", sender: 'bot' },
-        // mensagens relevantes para as condições do empréstimo
+        { content: "Interest rates from 1.49% per month and payment in up to 48 months. You can simulate a loan at: ", sender: 'bot' },
+        { content: <a href="https://www.google.com.br/" className="text-blue-500 hover:text-blue-600">{`https://www.google.com.br/`}</a>, sender: 'bot' },
       ]);
     } else if (option === 'help') {
       setMessages((prevMessages) => [
         ...prevMessages,
         { content: 'i want help', sender: user },
-        { content: "mensagens relevantes para a ajuda", sender: 'bot' },
-        // mensagens relevantes para a ajuda
+        { content: "If you have any questions, you can access the FAQ at the following link: ", sender: 'bot' },
+        { content: <a href="https://www.google.com.br/" className="text-blue-500 hover:text-blue-600">{`https://www.google.com.br/`}</a>, sender: 'bot' },
+        { content: "if necessary, contact us through the means provided by the website.", sender: 'bot' },
       ]);
     }
   };
@@ -166,7 +167,7 @@ const Chatbot = () => {
             </div>
           </div>
         </header>
-        <div className="max-w-md w-full h-full flex flex-col py-2 bg-white rounded-lg shadow-lg overflow-y-auto">
+        <div className="max-w-md w-full h-full py-12 flex flex-col bg-white rounded-lg shadow-lg overflow-y-auto">
           {messages.map((message, index) => (
             <ChatMessage
               key={index}
