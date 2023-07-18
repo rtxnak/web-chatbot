@@ -1,14 +1,15 @@
 'use client'
 
 import { redirect } from 'next/navigation';
-import { useThisContext } from '../context/context';
 
+export default function Home() {
 
-export default async function Home({ params }) {
-    const { user, loading } = useThisContext()
-    if (!loading && !user) {
+    const user = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
+
+    if (!token && !user) {
         return redirect('/login')
-    } else if (!loading && user) {
+    } else if (token && user) {
         return redirect('/chatbot')
     }
 }
