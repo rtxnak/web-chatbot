@@ -11,17 +11,24 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   const router = useRouter();
 
-  const user = localStorage.getItem('username');
-  const token = localStorage.getItem('token');
-
   useEffect(() => {
-    if (!user || !token) {
-      router.push('/');
-    } else {
+    try {
+      const user = localStorage.getItem('username');
+      const token = localStorage.getItem('token');
       setIsLoading(false);
+      setUser(user);
+      setToken(token);
+      if (!user || !token) {
+        router.push('/login')
+        return
+      }
+    } catch (err) {
+      console.log(err)
     }
   }, [user, token, router]);
 
@@ -155,7 +162,7 @@ const Chatbot = () => {
           <div className="max-w-md w-full mx-auto px-4 py-2 flex justify-between items-center">
             <div>
               <h1 className="text-3xl font-black text-black">Chatbot</h1>
-              <span className="text-gray-600">{`User: ${user.toUpperCase()}`}</span>
+              <span className="text-gray-600">{`User: ${user?.toUpperCase()}`}</span>
             </div>
             <div className="flex items-center space-x-2">
               <Link href="/chat-historic">

@@ -8,17 +8,26 @@ import { getChatHistory } from '../../services/webchatbotAPI';
 const ChatHistoric = () => {
   const [chats, setChats] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
   const router = useRouter();
 
-  const user = localStorage.getItem('username');
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    if (!token || !user) {
-      router.push('/login');
-      return;
+    try {
+      const user = localStorage.getItem('username');
+      const token = localStorage.getItem('token');
+      setUser(user);
+      setToken(token);
+      if (!token || !user) {
+        router.push('/login');
+        return;
+      }
+    } catch (err) {
+      console.log(err)
     }
+
 
     async function fetchChatHistory() {
       try {
