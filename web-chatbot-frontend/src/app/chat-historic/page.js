@@ -23,7 +23,7 @@ const ChatHistoric = () => {
     async function fetchChatHistory() {
       try {
         const chatData = await getChatHistory(token);
-        setChats([...chatData].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)));
+        setChats([...chatData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
         setIsLoading(false);
       } catch (error) {
         console.error('Failed to fetch chat history:', error);
