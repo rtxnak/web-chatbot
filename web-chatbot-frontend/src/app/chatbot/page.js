@@ -150,11 +150,13 @@ const Chatbot = () => {
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100">
       <div className="flex-1 overflow-hidden px-1 pt-2 pb-8 max-w-md w-full">
-        <header className="bg-white shadow-sm border flex h-1/6 md:h-min">
+        <header className="bg-gradient-to-r from-purple-200 to-purple-300 shadow-sm border flex h-min">
           <div className="max-w-md w-full mx-auto px-4 py-2 flex justify-between items-center">
-            <h1 className="text-xl font-semibold">Chatbot</h1>
+            <div>
+              <h1 className="text-3xl font-black text-black">Chatbot</h1>
+              <span className="text-gray-600">{`User: ${user.toUpperCase()}`}</span>
+            </div>
             <div className="flex items-center space-x-2">
-              <span className="text-gray-600">{user.toUpperCase()}</span>
               <Link href="/chat-historic">
                 <p className="text-green-500 hover:text-green-600 font-semibold">Chat History</p>
               </Link>

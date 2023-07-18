@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import { saveAs } from 'file-saver';
 import { getChatHistory } from '../../services/webchatbotAPI';
 
@@ -11,7 +11,7 @@ const ChatHistoric = () => {
 
   const router = useRouter();
 
-  const user = localStorage.getItem('username')
+  const user = localStorage.getItem('username');
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -55,9 +55,12 @@ const ChatHistoric = () => {
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100">
       <div className="flex-1 overflow-hidden px-1 pt-2 pb-8 max-w-md w-full">
-        <header className="bg-white shadow-sm border flex h-1/6 md:h-min">
-          <div className="max-w-md w-full mx-auto px-4 py-2 flex justify-between items-center">
-            <h1 className="text-xl font-semibold">Chat History</h1>
+        <header className="bg-gradient-to-r from-purple-200 to-purple-300 shadow-sm border flex items-center justify-between h-min">
+          <div className="max-w-md w-full mx-auto px-4 py-2">
+            <h1 className="text-3xl font-black text-black">Chat History</h1>
+            <span className="text-gray-600">{`User: ${user.toUpperCase()}`}</span>
+          </div>
+          <div className="max-w-md w-full mx-auto px-4 py-2 flex justify-end">
             <button
               type="button"
               className="text-blue-500 hover:text-blue-600 font-semibold"
