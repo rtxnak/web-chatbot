@@ -70,7 +70,7 @@ const ChatHistoric = () => {
             </button>
           </div>
         </header>
-        <div className="max-w-md w-full h-full flex flex-col py-2 bg-white rounded-lg shadow-lg overflow-y-auto">
+        <div className="max-w-md w-full h-full flex flex-col pb-12 bg-white rounded-lg shadow-lg overflow-y-auto">
           {chats.map((chat, index) => (
             <div key={chat.id} className="flex justify-between items-center px-4 py-2 border-b">
               <div>

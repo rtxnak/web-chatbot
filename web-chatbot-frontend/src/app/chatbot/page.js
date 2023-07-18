@@ -167,7 +167,7 @@ const Chatbot = () => {
             </div>
           </div>
         </header>
-        <div className="max-w-md w-full h-full py-12 flex flex-col bg-white rounded-lg shadow-lg overflow-y-auto">
+        <div className="max-w-md w-full h-full pt-2 pb-12 flex flex-col bg-white rounded-lg shadow-lg overflow-y-auto">
           {messages.map((message, index) => (
             <ChatMessage
               key={index}
