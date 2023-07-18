@@ -20,7 +20,7 @@ export class ChatEntity {
   @Column()
   username: string;
 
-  @Column()
+  @Column('longtext')
   chat: string;
 
   @ManyToOne(() => UserEntity, (user) => user.id)
