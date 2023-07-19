@@ -1,9 +1,9 @@
 # web-chatbot
 ## About project
-<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/05fe5b14-ee56-4655-8d55-afee5484296a" alt="login" width="200"/>
-<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/568c88a0-b22a-40fc-85e9-170687a0c734" alt="register" width="200"/>
-<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/852bc534-e071-4531-bb5b-dda93fd007dd" alt="chatbot" width="200"/>
-<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/3c0362a0-5316-4ddc-9d6d-53783d625c9b" alt="chat-historic" width="200"/>
+<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/e6cddaa5-4503-407e-a20f-174d39ef81bd" alt="login" width="200"/>
+<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/7699dd75-8c02-4342-b3ed-e9f423309c5e" alt="register" width="200"/>
+<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/aeb9cc82-8e10-4d50-9b9d-a91f6537b4a3" alt="chatbot" width="200"/>
+<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/c566abd4-dcf3-47ef-8543-8f7a5801393f" alt="chat-historic" width="200"/>
 
 This project was developed to a technical test with the [skills](#skills) on a full stack situation. Its a chatbot, it can interpret the terms: "Hello," "Goodbye," "Good," "I want" to initiate a conversation thread with the user.
 Its necessary to create an account and login to continue the conversation.
