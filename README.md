@@ -1,5 +1,9 @@
 # web-chatbot
 ## About project
+<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/05fe5b14-ee56-4655-8d55-afee5484296a" alt="login" width="200"/>
+<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/568c88a0-b22a-40fc-85e9-170687a0c734" alt="register" width="200"/>
+<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/852bc534-e071-4531-bb5b-dda93fd007dd" alt="chatbot" width="200"/>
+<img src="https://github.com/rtxnak/web-chatbot/assets/88905400/3c0362a0-5316-4ddc-9d6d-53783d625c9b" alt="chat-historic" width="200"/>
 
 This project was developed to a technical test with the [skills](#skills) on a full stack situation. Its a chatbot, it can interpret the terms: "Hello," "Goodbye," "Good," "I want" to initiate a conversation thread with the user.
 Its necessary to create an account and login to continue the conversation.
