@@ -51,7 +51,7 @@ On terminal:
 
 3. Move to app folder
 ```bash
-  cd busca-livre-app/
+  cd web-chatbot/ 
 ```
 
 4. Run the application with docker-compose
